@@ -4,8 +4,10 @@ module.exports = {
   mode: 'development',
   devtool: 'source-map',
   devServer: {
-    port: 5000,
+    port: 5001,
     compress: true,
-    contentBase: path.resolve(__dirname, 'dist'),
+    static: {
+      directory: path.resolve(__dirname, 'dist'),
+    },
   },
 };

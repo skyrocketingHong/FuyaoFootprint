@@ -1,26 +1,23 @@
 <template>
-    <Map/>
+  <Map />
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-import Map from './components/Map.vue';
-import * as types from './store/actionType';
+import { mapActions } from "vuex";
+import Map from "./components/Map.vue";
+import * as types from "./store/actionType";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     Map,
   },
   methods: {
     ...mapActions([types.SET_GEODATA]),
   },
-  mounted() {
-    // this[types.SET_GEODATA]('assets/world.json');
-  },
+  mounted() {},
 };
 </script>
 
 <style scoped lang='scss'>
-
 </style>

@@ -1,5 +1,4 @@
 const data = [
-  { name: '长沙市', map: 'changsha' },
   { name: '常德市', map: 'changde' },
   { name: '郴州市', map: 'chenzhou' },
   { name: '衡阳市', map: 'hengyang' },

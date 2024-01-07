@@ -10,11 +10,26 @@ class FillAreaLayer {
     this.pieData = pieData;
     this.mapData = mapData;
 
+    // 检测日夜间模式
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    // 设置初始颜色配置
+    this.option = this.getOption(isDarkMode);
+
+    // 注册地图，渲染图表
+    echarts.registerMap(this.mapName, this.geoData);
+    this.render(this.chart, this.option);
+
+    // 监听系统主题变化（可选）
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+      this.updateTheme(event.matches);
+    });
+
     const color = ['#79b685', '#a7c69d', '#fee090', '#eee']; // '#305f3e',
 
     const title = {
-      text: "PLACES I'V BEEN TO.",
-      subtext: '环游世界',
+      text: "扶摇 skyrocketing 的足迹",
+      subtext: '总有一天会填满全部颜色💪',
       sublink: '',
       left: 'left',
       textStyle: {
@@ -29,22 +44,13 @@ class FillAreaLayer {
         name: this.areaName,
         type: 'text',
         z: 100,
-        left: 65,
+        left: 180,
         top: '40px',
         style: {
           fill: '#3eaf7c',
           text: this.areaName,
           font: '12px Microsoft YaHei',
         },
-        // onclick: function () { // eslint-disable-line object-shorthand
-        //   console.log('click graphic: ', this.style);
-        // },
-        // onmouseover: function () { // eslint-disable-line object-shorthand
-        //   this.style.textFill = '#3ecf7c';
-        // },
-        // onmouseout: function () { // eslint-disable-line object-shorthand
-        //   this.style.textFill = '#3eaf7c';
-        // },
       },
     ];
 
@@ -94,7 +100,7 @@ class FillAreaLayer {
     const pieSeries = {
       type: 'pie',
       zLevel: 1,
-      center: [60, 200],
+      center: [120, 200],
       radius: ['10%', '15%'],
       tooltip: {
         formatter: (params) => `${params.percent}%`,
@@ -131,7 +137,11 @@ class FillAreaLayer {
         min: 1,
       },
       itemStyle: {
-        emphasis: { label: { show: true } },
+        emphasis: {
+          label: {
+            show: true
+          }
+        },
         areaColor: '#fff',
       },
       data: this.mapData,
@@ -146,11 +156,6 @@ class FillAreaLayer {
       visualMap,
       toolbox,
       series: [pieSeries, mapSeries],
-      // series: {
-      //     name: 'china',
-      //     type: 'map',
-      //     map: 'china'
-      // },
     };
 
     echarts.registerMap(this.mapName, this.geoData);
@@ -162,6 +167,24 @@ class FillAreaLayer {
       this.chart.setOption(o);
     });
   }
+
+  // 获取 ECharts 配置
+  getOption(isDarkMode) {
+    return {
+      // ... 其他配置 ...
+
+      // 根据 isDarkMode 设置颜色
+      backgroundColor: isDarkMode ? '#fff' : 'white',
+      // 其他与颜色相关的配置
+    };
+  }
+
+  // 更新主题
+  updateTheme(isDarkMode) {
+    const newOption = this.getOption(isDarkMode);
+    this.chart.setOption(newOption);
+  }
+
 
   getMapName() {
     return this.names[this.names.length - 1];

@@ -1,12 +1,12 @@
 
-import kingdoms from '../config/kingdoms';
+import nations from '../config/nations';
 import provinces from '../config/china.province';
 import cities from '../config/china.cityies';
 
 function getMapSourceName(areaName) {
-  const kingdom = kingdoms.find((item) => item.name === areaName);
-  if (kingdom) {
-    return { level: 1, sourceName: kingdom.map };
+  const nation = nations.find((item) => item.name === areaName);
+  if (nation) {
+    return { level: 1, sourceName: nation.map };
   }
   const province = provinces.find((item) => item.name === areaName);
   if (province) {
@@ -16,7 +16,6 @@ function getMapSourceName(areaName) {
   if (city) {
     return { level: 3, sourceName: city.map };
   }
-  // console.log(`Could'nt find map of "${areaName}".`);
   return null;
 }
 

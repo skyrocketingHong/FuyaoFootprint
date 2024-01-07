@@ -1,5 +1,5 @@
 
-import Vue from 'vue';
+import { createApp } from 'vue';
 import * as echarts from 'echarts/lib/echarts';
 import 'echarts/lib/chart/map';
 import 'echarts/lib/chart/pie';
@@ -10,4 +10,7 @@ import 'echarts/lib/component/legend';
 import 'echarts/lib/component/toolbox';
 import 'echarts/lib/component/graphic';
 
-Vue.prototype.$echarts = echarts;
+const app = createApp();
+
+app.config.globalProperties.$echarts = echarts;
+app.mount('#middle-map');

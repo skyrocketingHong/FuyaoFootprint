@@ -1,9 +1,9 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const { VueLoaderPlugin } = require('vue-loader');
 
 const devConfig = require('./webpack.dev');
 const prodConfig = require('./webpack.prod');
@@ -61,9 +61,12 @@ module.exports = (env) => {
         filename: 'style.css',
       }),
       new VueLoaderPlugin(),
-      new CopyWebpackPlugin([
-        { from: './src/assets', to: 'assets' },
-      ]),
+      new CopyWebpackPlugin({
+        patterns: [
+          { from: './src/assets', to: 'assets' },
+      ],
+        options: {}
+      }),
       new HtmlWebpackPlugin({
         template: './public/index.html',
         filename: 'index.html',

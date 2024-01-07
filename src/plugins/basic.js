@@ -1,4 +1,4 @@
-import Vue from 'vue';
-import toast from '@champyin/toast';
+import { createApp } from 'vue';
 
-Vue.use(toast);
+const app = createApp();
+app.mount('#middle-map');

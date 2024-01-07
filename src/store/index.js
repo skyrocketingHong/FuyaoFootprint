@@ -1,9 +1,10 @@
-import Vue from 'vue';
+import { createApp } from 'vue';
 import Vuex from 'vuex';
 import * as types from './actionType';
 import util from '../utils/util';
 
-Vue.use(Vuex);
+const app = createApp();
+app.use(Vuex);
 
 export default new Vuex.Store({
   state: {
